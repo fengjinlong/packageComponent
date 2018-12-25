@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'FormItem',
+  name: 'JInput',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
