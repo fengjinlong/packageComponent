@@ -6,6 +6,11 @@
 <script>
   export default {
     name: 'JForm',
+    provide() {
+      return {
+        form : this
+      };
+    },
     data () {
       return {
         fields: []

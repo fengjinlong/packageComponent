@@ -1,35 +1,47 @@
 <template>
-  <div class="hello">
-    <h2>Essential Links</h2>
-    <h2>Ecosystem</h2>
-  </div>
+  <input
+    type="text"
+    :value="currentValue"
+    @input="handleInput"
+    @blur="handleBlur"
+    />
 </template>
-
 <script>
-export default {
-  name: 'JInput',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  import Emitter from '../../mixins/emitter.js';
+
+  export default {
+    name: 'iInput',
+    mixins: [ Emitter ],
+    props: {
+      value: {
+        type: String,
+        default: ''
+      },
+    },
+    data () {
+      return {
+        currentValue: this.value
+      }
+    },
+    watch: {
+      value (val) {
+        this.currentValue = val;
+      }
+    },
+    methods: {
+      handleInput (event) {
+        const value = event.target.value;
+        this.currentValue = value;
+        this.$emit('input', value);
+        this.dispatch('iFormItem', 'on-form-change', value);
+      },
+      handleBlur () {
+        this.dispatch('iFormItem', 'on-form-blur', this.currentValue);
+      }
     }
   }
-}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="stylus" rel="stylesheet/stylus">
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style lang='stylus' rel='stylesheet/stylus' scoped>
+
 </style>
