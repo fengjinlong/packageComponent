@@ -55,6 +55,11 @@
         formRules = formRules ? formRules[this.prop] : [];
         return [].concat(formRules || []);
       },
+      // 只支持 blur 和 change，所以过滤出符合要求的 rule 规则
+      getFilteredRule (trigger) {
+        const rules = this.getRules();
+        return rules.filter(rule => !rule.trigger || rule.trigger.indexOf(trigger) !== -1);
+      },
     },
     // 组件销毁前，将实例从 Form 的缓存中移除
     beforeDestroy () {
