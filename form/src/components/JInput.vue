@@ -7,10 +7,10 @@
     />
 </template>
 <script>
-  import Emitter from '../../mixins/emitter.js';
+  import Emitter from '../mixins/emitter.js';
 
   export default {
-    name: 'iInput',
+    name: 'JInput',
     mixins: [ Emitter ],
     props: {
       value: {
@@ -33,10 +33,10 @@
         const value = event.target.value;
         this.currentValue = value;
         this.$emit('input', value);
-        this.dispatch('iFormItem', 'on-form-change', value);
+        this.dispatch('JFormItem', 'on-form-change', value);
       },
       handleBlur () {
-        this.dispatch('iFormItem', 'on-form-blur', this.currentValue);
+        this.dispatch('JFormItem', 'on-form-blur', this.currentValue);
       }
     }
   }
