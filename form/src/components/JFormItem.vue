@@ -46,8 +46,8 @@
         // 设置初始值，以便在重置时恢复默认值
         this.initialValue = this.fieldValue
         this.setRules()
-        // this.$on('on-form-blur', this.onFieldBlur)
-        // this.$on('on-form-change', this.onFieldChange)
+        this.$on('on-form-blur', this.onFieldBlur)
+        this.$on('on-form-change', this.onFieldChange)
       }
     },
     methods: {
@@ -59,8 +59,8 @@
             this.isRequired = rule.required;
           });
         }
-        this.$on('on-form-blur', this.onFieldBlur)
-        this.$on('on-form-change', this.onFieldChange)
+        // this.$on('on-form-blur', this.onFieldBlur)
+        // this.$on('on-form-change', this.onFieldChange)
       },
       onFieldBlur() {
         this.validate('blur');
