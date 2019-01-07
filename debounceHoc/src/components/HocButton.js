@@ -37,7 +37,6 @@ export default {
       },
       attrs: this.$attrs,
       scopedSlots: this.$scopedSlots
-    // }, slots)
-    }, this.btnName)
+    }, slots)
   },
 }
