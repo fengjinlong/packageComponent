@@ -13,6 +13,7 @@
     </JForm>
     <button @click="handleSubmit">提交</button>
     <button @click="handleReset">重置</button>
+    <T></T>
   </div>
 </template>
 
@@ -21,8 +22,9 @@ import JForm from '@/components/JForm'
 import JFormItem from '@/components/JFormItem'
 import JInput from '@/components/JInput'
 import JCheckbox from '@/components/JCheckbox'
+import T from '@/components/t'
 export default {
-  components: { JForm, JFormItem, JInput,JCheckbox },
+  components: { JForm, JFormItem, JInput,JCheckbox,T },
   data () {
     return {
       formValidate: {
@@ -39,13 +41,14 @@ export default {
           { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
         ],
         check: [
-          {required: true, message: 'changemust', trigger: 'change'}
+          {type: 'boolean',required: true, message: 'changemust', trigger: 'change'}
         ]
       }
     }
   },
   methods: {
     handleSubmit () {
+      console.log(this.formValidate.check)
       this.$refs.form.validate((valid) => {
         if (valid) {
         } else {

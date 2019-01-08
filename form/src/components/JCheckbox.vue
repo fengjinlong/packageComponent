@@ -1,21 +1,22 @@
 <template>
   <label>
     <span>
-      <input
-        type="checkbox"
-        :disabled="disabled"
-        :checked="currentValue"
-        @change="change">
+      <input v-if="group" type="checkbox" :disabled="disabled" :value="label" v-model="model" @change="change">
+      <input v-else type="checkbox" :disabled="disabled" :checked="currentValue" @change="change">
     </span>
     <slot></slot>
   </label>
 </template>
 <script>
-  import Emitter from '../mixins/emitter.js';
+  import Emitter from '../mixins/emitter.js'
+  import { findComponentUpward } from '../utils/assist.js'
   export default {
-    mixins: [ Emitter ],
+    mixins: [Emitter],
     name: 'JCheckbox',
     props: {
+      label: {
+        type: [String, Number, Boolean]
+      },
       disabled: {
         type: Boolean,
         default: false
@@ -33,13 +34,29 @@
         default: false
       }
     },
-    data () {
+    data() {
       return {
-        currentValue: this.value
+        currentValue: this.value,
+        model: [],
+        group: false,
+        parent: null
       };
     },
+    mounted(){
+      this.parent = findComponentUpward(this, 'iCheckboxGroup');
+
+      if (this.parent) {
+        this.group = true;
+      }
+
+      if (this.group) {
+        this.parent.updateModel(true);
+      } else {
+        this.updateModel();
+      }
+    },
     methods: {
-      change (event) {
+      change(event) {
         if (this.disabled) {
           return false;
         }
@@ -51,15 +68,18 @@
         this.$emit('input', value);
         this.$emit('on-change', value);
         console.log(value)
-        this.dispatch('iFormItem', 'on-form-change', value);
+        this.dispatch('JFormItem', 'on-form-change', value);
       },
-      updateModel () {
+      updateModel() {
         this.currentValue = this.value === this.trueValue;
+        console.log(this.currentValue)
       }
     },
     watch: {
-      value (val) {
+      value(val) {
+        console.log(2)
         if (val === this.trueValue || val === this.falseValue) {
+          console.log(1)
           this.updateModel();
         } else {
           throw 'Value should be trueValue or falseValue.';
@@ -67,4 +87,5 @@
       }
     }
   }
+
 </script>
