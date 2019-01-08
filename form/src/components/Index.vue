@@ -7,6 +7,9 @@
       <JFormItem label="邮箱" prop="mail">
         <JInput v-model="formValidate.mail"></JInput>
       </JFormItem>
+      <JFormItem label="邮箱" prop="check">
+        <JCheckbox v-model="formValidate.check"></JCheckbox>
+      </JFormItem>
     </JForm>
     <button @click="handleSubmit">提交</button>
     <button @click="handleReset">重置</button>
@@ -17,12 +20,14 @@
 import JForm from '@/components/JForm'
 import JFormItem from '@/components/JFormItem'
 import JInput from '@/components/JInput'
+import JCheckbox from '@/components/JCheckbox'
 export default {
-  components: { JForm, JFormItem, JInput },
+  components: { JForm, JFormItem, JInput,JCheckbox },
   data () {
     return {
       formValidate: {
         name: '',
+        check: '',
         mail: ''
       },
       ruleValidate: {
@@ -33,6 +38,9 @@ export default {
           { required: true, message: '邮箱不能为空', trigger: 'blur' },
           { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
         ],
+        check: [
+          {required: true, message: 'changemust', trigger: 'change'}
+        ]
       }
     }
   },

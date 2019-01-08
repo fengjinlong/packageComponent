@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <CC></CC>
+    <CC v-model="single"></CC>
   </div>
 </template>
 
@@ -10,7 +10,13 @@ export default {
   name: 'HelloWorld2',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      single: true
+    }
+  },
+  watch: {
+    single (n,v) {
+      console.log(n)
+      console.log(v)
     }
   },
   components: {

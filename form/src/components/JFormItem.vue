@@ -66,6 +66,7 @@
         this.validate('blur');
       },
       onFieldChange() {
+        console.log('ccc')
         this.validate('change');
       },
       // 从 Form 的 rules 属性中，获取当前 FormItem 的校验规则
