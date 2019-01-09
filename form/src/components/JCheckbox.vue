@@ -73,14 +73,11 @@
       },
       updateModel() {
         this.currentValue = this.value === this.trueValue;
-        console.log(this.currentValue)
       }
     },
     watch: {
       value(val) {
-        console.log(2)
         if (val === this.trueValue || val === this.falseValue) {
-          console.log(1)
           this.updateModel();
         } else {
           throw 'Value should be trueValue or falseValue.';

@@ -28,9 +28,7 @@
       updateModel (update) {
         this.childrens = findComponentsDownward(this, 'JCheckbox');
         if (this.childrens) {
-          console.log(this)
           const { value } = this;
-          console.log(value)
           this.childrens.forEach(child => {
             child.model = value;
 

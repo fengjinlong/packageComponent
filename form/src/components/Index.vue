@@ -7,11 +7,8 @@
       <JFormItem label="邮箱" prop="mail">
         <JInput v-model="formValidate.mail"></JInput>
       </JFormItem>
-      <JFormItem label="邮箱1" prop="check">
-        <JCheckbox v-model="formValidate.check"></JCheckbox>
-      </JFormItem>
       <JFormItem label="group" prop="checkArr">
-        <JCheckboxGroup v-model="formValidate.checkArr" @on-change="fun">
+        <JCheckboxGroup v-model="formValidate.checkArr">
           <JCheckbox label="111"></JCheckbox>
           <JCheckbox label="222"></JCheckbox>
         </JCheckboxGroup>
@@ -34,7 +31,6 @@ export default {
     return {
       formValidate: {
         name: '',
-        check: '',
         checkArr: [],
         mail: ''
       },
@@ -49,18 +45,14 @@ export default {
         check: [
           {type: 'boolean',required: true, message: 'changemust', trigger: 'change'}
         ],
-        groupcheck: [
-          {required: true, message: 'groupcheckmust', trigger: 'change'}
+        checkArr: [
+          {required: true, message: 'groupcheckmust', trigger: 'change',type:'array'}
         ]
       }
     }
   },
   methods: {
-    fun (v) {
-      console.log(v)
-    },
     handleSubmit () {
-      console.log(this.formValidate.check)
       this.$refs.form.validate((valid) => {
         if (valid) {
         } else {
