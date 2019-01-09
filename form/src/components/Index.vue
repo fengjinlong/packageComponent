@@ -7,13 +7,18 @@
       <JFormItem label="邮箱" prop="mail">
         <JInput v-model="formValidate.mail"></JInput>
       </JFormItem>
-      <JFormItem label="邮箱" prop="check">
+      <JFormItem label="邮箱1" prop="check">
         <JCheckbox v-model="formValidate.check"></JCheckbox>
+      </JFormItem>
+      <JFormItem label="group" prop="groupcheck">
+        <JCheckboxGroup v-model="formValidate.checkArr" @on-change="fun">
+          <JCheckbox label="111"></JCheckbox>
+          <JCheckbox label="222"></JCheckbox>
+        </JCheckboxGroup>
       </JFormItem>
     </JForm>
     <button @click="handleSubmit">提交</button>
     <button @click="handleReset">重置</button>
-    <T></T>
   </div>
 </template>
 
@@ -22,14 +27,15 @@ import JForm from '@/components/JForm'
 import JFormItem from '@/components/JFormItem'
 import JInput from '@/components/JInput'
 import JCheckbox from '@/components/JCheckbox'
-import T from '@/components/t'
+import JCheckboxGroup from '@/components/JCheckboxGroup'
 export default {
-  components: { JForm, JFormItem, JInput,JCheckbox,T },
+  components: { JForm, JFormItem, JInput,JCheckbox,JCheckboxGroup },
   data () {
     return {
       formValidate: {
         name: '',
         check: '',
+        checkArr: [],
         mail: ''
       },
       ruleValidate: {
@@ -42,11 +48,17 @@ export default {
         ],
         check: [
           {type: 'boolean',required: true, message: 'changemust', trigger: 'change'}
+        ],
+        groupcheck: [
+          {required: true, message: 'groupcheckmust', trigger: 'change'}
         ]
       }
     }
   },
   methods: {
+    fun (v) {
+      console.log(v)
+    },
     handleSubmit () {
       console.log(this.formValidate.check)
       this.$refs.form.validate((valid) => {

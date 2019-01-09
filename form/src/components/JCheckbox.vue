@@ -43,7 +43,7 @@
       };
     },
     mounted(){
-      this.parent = findComponentUpward(this, 'iCheckboxGroup');
+      this.parent = findComponentUpward(this, 'JCheckboxGroup');
 
       if (this.parent) {
         this.group = true;
@@ -60,15 +60,16 @@
         if (this.disabled) {
           return false;
         }
-
         const checked = event.target.checked;
         this.currentValue = checked;
-
         const value = checked ? this.trueValue : this.falseValue
         this.$emit('input', value);
-        this.$emit('on-change', value);
-        console.log(value)
-        this.dispatch('JFormItem', 'on-form-change', value);
+        if (this.group) {
+          this.parent.change(this.model);
+        } else {
+          this.$emit('on-change', value);
+          this.dispatch('iFormItem', 'on-form-change', value);
+        }
       },
       updateModel() {
         this.currentValue = this.value === this.trueValue;
