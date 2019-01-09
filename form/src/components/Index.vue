@@ -10,7 +10,7 @@
       <JFormItem label="邮箱1" prop="check">
         <JCheckbox v-model="formValidate.check"></JCheckbox>
       </JFormItem>
-      <JFormItem label="group" prop="groupcheck">
+      <JFormItem label="group" prop="checkArr">
         <JCheckboxGroup v-model="formValidate.checkArr" @on-change="fun">
           <JCheckbox label="111"></JCheckbox>
           <JCheckbox label="222"></JCheckbox>
