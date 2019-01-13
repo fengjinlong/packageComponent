@@ -3,6 +3,8 @@
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <button @click="click">$Alert</button>
+    <button @click="click2">$Alert2</button>
+    <button @click="click3">$Confirm</button>
   </div>
 </template>
 
@@ -18,9 +20,18 @@ export default {
     click () {
       let ob = {
         content: '我是提示信息 alert',
-        duration: 200
+        duration: 3
       }
       this.$Alert.info(ob)
+    },
+    click2 () {
+      let ob = {
+        content: '我是提示信息 alert2'
+      }
+      this.$Alert.info(ob)
+    },
+    click3 () {
+      this.$Confirm({content: '我是confirm'})
     }
   }
 }

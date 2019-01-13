@@ -2,17 +2,38 @@ import Alert from './alert.vue'
 import Vue from 'vue'
 
 Alert.newInstance = properties => {
-  console.log('have')
-  const props = properties || {};
-
-  const Instance = new Vue({
-    data: props,
-    render (h) {
-      return h(Alert, {
-        props: props
-      });
-    }
-  });
+  let props = {type:'alert'}
+  let Instance
+  if (properties === 'confirm') {
+    props = {type: 'confirm'}
+    Instance = new Vue({
+      data: props,
+      render (h) {
+        return h(Alert, {
+          props: props,
+          on: {
+            click() {
+              console.log(1111)
+            }
+          }
+        });
+      }
+    });
+  } else {
+    Instance = new Vue({
+      data: props,
+      render (h) {
+        return h(Alert, {
+          props: props,
+          on: {
+            click() {
+              console.log(1111)
+            }
+          }
+        });
+      }
+    });
+  }
 
   const component = Instance.$mount();
   document.body.appendChild(component.$el);
@@ -25,6 +46,12 @@ Alert.newInstance = properties => {
     },
     remove (name) {
       alert.remove(name);
+    },
+    addConfirm (noticeProps) {
+      alert.addConfirm(noticeProps);
+    },
+    removeConfirm (name) {
+      alert.remove(name)
     }
   }
 }
