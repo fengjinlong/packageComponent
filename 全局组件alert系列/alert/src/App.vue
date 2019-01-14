@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
-    <button @click="click">$Alert</button>
-    <button @click="click2">$Alert2</button>
+    <button @click="click1">$Alert</button>
+    <!-- <button @click="click2">$Alert2</button> -->
     <button @click="click3">$Confirm</button>
   </div>
 </template>
@@ -13,14 +12,13 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
     }
   },
   methods: {
-    click () {
+    click1 () {
       let ob = {
         content: '我是提示信息 alert',
-        duration: 3
+        duration: 30
       }
       this.$Alert.info(ob)
     },
@@ -31,7 +29,7 @@ export default {
       this.$Alert.info(ob)
     },
     click3 () {
-      this.$Confirm({content: '我是confirm'})
+     this.$Confirm.notice({content: '我是confirm'})
     }
   }
 }

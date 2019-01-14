@@ -1,13 +1,10 @@
 <template>
-  <div class="con">
-    <div v-show="!confirm" class="alert">
-      <div class="alert-main" v-for="item in notices" :key="item.name">
+    <div class="alert">
+      <div v-show="!confirm" class="alert-main" v-for="item in notices" :key="item.name">
         <div class="alert-content">{{ item.content }}</div>
       </div>
-    </div>
-    <div v-show="confirm" class="confirm">
-      <div class="confirm-main" v-for="item in notices2" :key="item.name">
-        <div class="confirm-content">
+      <div v-show="confirm" class="alert-main" v-for="item in notices2" :key="item.name">
+        <div class="alert-content">
           <div>{{ item.content }}？</div>
           <div>
             <button>确认</button>
@@ -16,11 +13,9 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 <script>
   let seed = 0;
-
   function getUuid() {
     return 'alert_' + (seed++);
   }
@@ -33,7 +28,6 @@
       }
     },
     created() {
-      console.log(this.$options.parent.type)
       if (this.$options.parent.type === 'confirm') {
         this.confirm = 1
       } else {
@@ -47,7 +41,6 @@
           name: name
         }, notice);
         this.notices.push(_notice);
-        // 定时移除，单位：秒
         const duration = notice.duration;
         setTimeout(() => {
           this.remove(name);
@@ -68,38 +61,28 @@
         this.notices2.push(_confirm)
       },
       confirmConcle (name) {
-        console.log(name)
-        console.log(notices2)
+        let notices2 = this.notices2;
         for (let i = 0; i < notices2.length; i++) {
           if (notices2[i].name === name) {
             this.notices2.splice(i, 1);
+            // this.$emit('ppp2',1)
             break;
           }
         }
       }
     }
   }
-
 </script>
 <style>
-  .con {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+  #alert {
+    width: 400px
   }
-  .alert,.confirm {
-    position: fixed;
+  .alert {
     width: 100%;
-    top: 16px;
-    left: 0;
-    text-align: center;
-    pointer-events: none;
+    border: 1px solid red;
   }
-
-  .alert-content,.confirm-content {
-    display: inline-block;
+  .alert-content{
+    display: block;
     padding: 8px 16px;
     background: #fff;
     border-radius: 3px;

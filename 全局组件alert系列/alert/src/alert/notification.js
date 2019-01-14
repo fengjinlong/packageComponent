@@ -1,42 +1,41 @@
-import Alert from './alert.vue'
-import Vue from 'vue'
+import Alert from './alert.vue';
+import Vue from 'vue';
 
 Alert.newInstance = properties => {
+  console.log('have')
   let props = {type:'alert'}
   let Instance
   if (properties === 'confirm') {
     props = {type: 'confirm'}
-    Instance = new Vue({
-      data: props,
-      render (h) {
-        return h(Alert, {
-          props: props,
-          on: {
-            click() {
-              console.log(1111)
-            }
-          }
-        });
-      }
-    });
-  } else {
-    Instance = new Vue({
-      data: props,
-      render (h) {
-        return h(Alert, {
-          props: props,
-          on: {
-            click() {
-              console.log(1111)
-            }
-          }
-        });
-      }
-    });
   }
 
+  Instance = new Vue({
+    data: props,
+    methods: {
+      ppp1 () {
+        // this.props['pro'] = new Promise()
+        // console.log(this.props['pro'])
+        console.log(5)
+      }
+    },
+
+    render (h) {
+      return h(Alert, {
+        props: props,
+        on: {
+          // ppp2: this.ppp1()
+        }
+      });
+    }
+  });
+
   const component = Instance.$mount();
-  document.body.appendChild(component.$el);
+  if (document.getElementById('alert') === 'null' || document.getElementById('alert') === null) {
+    let a = document.createElement('div')
+    a.setAttribute('id', 'alert')
+    document.body.appendChild(a)
+  }
+  document.getElementById('alert').appendChild(component.$el);
 
   const alert = Instance.$children[0];
 
@@ -49,10 +48,15 @@ Alert.newInstance = properties => {
     },
     addConfirm (noticeProps) {
       alert.addConfirm(noticeProps);
+      return alert
     },
     removeConfirm (name) {
-      alert.remove(name)
+      alert.confirmConcle(name)
+    },
+    confirmStatus () {
+      return props.status
     }
   }
-}
-export default Alert
+};
+
+export default Alert;
