@@ -1,0 +1,15 @@
+{
+  "javascript.validate.enable": false,
+  "typescript.validate.enable": false,
+  "javascript.suggest.paths": false,
+  "typescript.surveys.enabled": false,
+  "typescript.suggestionActions.enabled": false,
+  "typescript.suggest.paths": false,
+  "typescript.suggest.autoImports": false,
+  "typescript.format.enable": false,
+  "typescript.format.insertSpaceAfterCommaDelimiter": false,
+  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "typescript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
+  "typescript.check.npmIsInstalled": false,
+  "typescript.autoClosingTags": false
+}
