@@ -1,18 +1,19 @@
 <template>
   <ul class="tree-ul">
     <li class="tree-li">
-      <span class="tree-expand" @click="handleExpand">
-        <span v-if="data.children && data.children.length && !data.expand">+</span>
-        <span v-if="data.children && data.children.length && data.expand">-</span>
+      <span class="tree-expand" @click="handleExpand(data.children)">
+        <span v-show="data.children&&data.children.length&&!data.expand">+</span>
+        <span v-show="data.children&&data.children.length&&data.expand">-</span>
       </span>
+      <span style="color:transparent" v-show="!data.children || !data.children.length">+</span>
       <i-checkbox
-        v-if="showCheckbox"
+        v-show="showCheckbox"
         :value="data.checked"
         @input="handleCheck"
       ></i-checkbox>
       <span>{{ data.title }}</span>
       <tree-node
-        v-if="data.expand"
+        v-show="data.expand"
         v-for="(item, index) in data.children"
         :key="index"
         :data="item"
@@ -46,11 +47,12 @@
       }
     },
     methods: {
-      handleExpand () {
-        this.$set(this.data, 'expand', !this.data.expand);
-
-        if (this.tree) {
-          this.tree.emitEvent('on-toggle-expand', this.data);
+      handleExpand (arr) {
+        if (arr != undefined && arr.length > 0) {
+          this.$set(this.data, 'expand', !this.data.expand);
+          if (this.tree) {
+            this.tree.emitEvent('on-toggle-expand', this.data);
+          }
         }
       },
       handleCheck (checked) {
@@ -74,7 +76,7 @@
       'data.children': {
         handler (data) {
           if (data) {
-            const checkedAll = !data.some(item => !item.checked);
+            const checkedAll = data.every(item => item.checked);
             this.$set(this.data, 'checked', checkedAll);
           }
         },

@@ -4,8 +4,6 @@
       v-for="(item, index) in cloneData"
       :key="index"
       :data="item"
-      @on-toggle-expand="ttt"
-      @on-check-change="ttt1"
       :show-checkbox="showCheckbox"
     ></tree-node>
   </div>
@@ -47,11 +45,8 @@
         this.cloneData = deepCopy(this.data);
       },
       emitEvent (eventName, data) {
+        // console.log(111)
         this.$emit(eventName, data, this.cloneData);
-      },
-      ttt1 () {},
-      ttt () {
-        console.log('ttt')
       }
     }
   }

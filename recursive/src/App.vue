@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <Tree :data="msg"></Tree>
+    <Tree 
+    :data="msg" 
+    @on-toggle-expand="ttt"
+    @on-check-change="check"
+    :showCheckbox="true"></Tree>
   </div>
 </template>
 
@@ -10,6 +14,16 @@ export default {
   components: {
     Tree
   },
+  methods: {
+    ttt (a,b) {
+      // console.log(a)
+      // console.log(b)
+    },
+    check(data,a) {
+      console.log(data)
+      console.log(a)
+    }
+  },
   name: 'app',
   data () {
     return {
@@ -17,31 +31,35 @@ export default {
         {
           title: 'parent 1',
           expand: true,
+          id: '1',
           children: [
             {
               title: 'parent 1-1',
               expand: true,
+              id: '2',
               children: [
                 {
+                  id: '3',
                   title: 'leaf 1-1-1'
                 },
                 {
+                  id: '4',
                   title: 'leaf 1-1-2'
                 }
               ]
             },
             {
-              title: 'parent 1-2',
-              children: [
-                {
-                  title: 'leaf 1-2-1'
-                },
-                {
-                  title: 'leaf 1-2-1'
-                }
-              ]
+              title: '11111',
+              id: '5',
             }
           ]
+        }
+      ],
+      msg2: [
+        {
+          title: 'parent 1',
+          expand: true,
+          id: '1'
         }
       ]
     }
@@ -54,9 +72,7 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 h1, h2 {
