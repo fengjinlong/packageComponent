@@ -29,7 +29,8 @@
     },
     data () {
       return {
-        cloneData: []
+        cloneData: [],
+        currentIdArr: []
       }
     },
     created () {
@@ -44,9 +45,27 @@
       rebuildData () {
         this.cloneData = deepCopy(this.data);
       },
+      getAllChecked (all) {
+        all.forEach(ele => {
+          if (ele.checked) {
+            this.currentIdArr.push(ele.id)
+          }
+          if (ele.children !== undefined && ele.children.length > 0) {
+            this.getAllChecked(ele.children)
+          }
+        });
+      },
       emitEvent (eventName, data) {
-        // console.log(111)
-        this.$emit(eventName, data, this.cloneData);
+        if (eventName === 'on-check-change') {
+          this.currentIdArr = []
+          let currentId = data.id
+          this.$nextTick(() => {
+            this.getAllChecked(this.cloneData)
+            this.$emit(eventName, currentId, this.currentIdArr);
+          })
+        } else {
+          this.$emit(eventName, data, this.cloneData);
+        }
       }
     }
   }

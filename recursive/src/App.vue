@@ -2,7 +2,6 @@
   <div id="app">
     <Tree 
     :data="msg" 
-    @on-toggle-expand="ttt"
     @on-check-change="check"
     :showCheckbox="true"></Tree>
   </div>
@@ -15,13 +14,9 @@ export default {
     Tree
   },
   methods: {
-    ttt (a,b) {
-      // console.log(a)
-      // console.log(b)
-    },
-    check(data,a) {
-      console.log(data)
-      console.log(a)
+    check(currentId,checkedArr) {
+      console.log(currentId)
+      console.log(checkedArr)
     }
   },
   name: 'app',
@@ -73,23 +68,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
 }
 </style>
